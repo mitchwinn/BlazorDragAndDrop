@@ -136,23 +136,6 @@ app {
     top: 0.5rem;
 }
 
-/** Simple drag and drop with Blazor CSS **/
-
-.shortcuts-container {
-    display: flex;
-    justify-content: space-around;
-}
-
-.shortcut-group {
-    display: flex;
-    flex-direction: column;
-    width: 312px;
-}
-
-    .shortcut-group ul {
-        flex: 1;
-    }
-
 .dropzone {
     padding: 30px;
     border: 1px dashed #75868a;

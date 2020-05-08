@@ -1,4 +1,7 @@
 ﻿@page "/"
+<div>
+    <button @onclick="AddShortcut">Add Shortcut</button>
+</div>
 
 <ShortcutContainer Shortcuts="Shortcuts" OnGroupUpdate="HandleGroupUpdated">
     <ShortcutsList ShortcutGroup="Default Shortcuts" />
@@ -21,5 +24,10 @@
     private void HandleGroupUpdated(ShortcutModel updatedShortcut)
     {
         Console.WriteLine(updatedShortcut.Title);
+    }
+
+    private void AddShortcut()
+    {
+        Shortcuts.Add(new ShortcutModel { Id = 6, Grouping = "Shortcut Group A", Title = "UB Account Maintanence", Link = "http://google.com", LinkDescription = "BR Something", LastUpdated = DateTime.Now });
     }
 }
