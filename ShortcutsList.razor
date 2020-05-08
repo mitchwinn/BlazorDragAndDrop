@@ -1,0 +1,48 @@
+<div class="shortcut-group">
+    <h3>@ShortcutGroup (@Shortcuts.Count())</h3>
+
+    <ul class="dropzone @dropClass"
+        ondragover="event.preventDefault();"
+        ondragstart="event.dataTransfer.setData('', event.target.id);"
+        @ondrop="HandleDrop"
+        @ondragenter="HandleDragEnter"
+        @ondragleave="HandleDragLeave">
+
+        @foreach (var shortcut in Shortcuts)
+        {
+            <Shortcut ShortcutModel="shortcut" />
+        }
+
+    </ul>
+</div>
+
+@code {
+    [CascadingParameter] ShortcutContainer Container { get; set; }
+    [Parameter] public string ShortcutGroup { get; set; }
+    [Parameter] public string[] Groups { get; set; }
+
+    List<ShortcutModel> Shortcuts = new List<ShortcutModel>();
+    string dropClass = "";
+
+    protected override void OnParametersSet()
+    {
+        Shortcuts.Clear();
+        Shortcuts.AddRange(Container.Shortcuts.Where(s => s.Grouping == ShortcutGroup));
+    }
+
+    private void HandleDragEnter()
+    {
+        if (ShortcutGroup == Container.Payload.Grouping) return;
+        dropClass = "can-drop";
+    }
+
+    private void HandleDragLeave()
+        => dropClass = "";
+
+    private async Task HandleDrop()
+    {
+        dropClass = "";
+
+        await Container.UpdateShortcutAsync(ShortcutGroup);
+    }
+}

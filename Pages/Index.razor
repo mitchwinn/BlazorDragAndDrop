@@ -1,0 +1,25 @@
+﻿@page "/"
+
+<ShortcutContainer Shortcuts="Shortcuts" OnGroupUpdate="HandleGroupUpdated">
+    <ShortcutsList ShortcutGroup="Default Shortcuts" />
+    <ShortcutsList ShortcutGroup="Shortcut Group A" />
+    <ShortcutsList ShortcutGroup="Shortcut Group B" />
+</ShortcutContainer>
+
+@code {
+    List<ShortcutModel> Shortcuts = new List<ShortcutModel>();
+
+    protected override void OnInitialized()
+    {
+        Shortcuts.Add(new ShortcutModel { Id = 1, Grouping = "Default Shortcuts", Title = "UB Account Maintanence", Link = "http://google.com", LinkDescription = "UB Account Maintenance", LastUpdated = DateTime.Now });
+        Shortcuts.Add(new ShortcutModel { Id = 2, Grouping = "Default Shortcuts", Title = "UB Account Maintanence", Link = "http://google.com", LinkDescription = "UB Account Maintenance", LastUpdated = DateTime.Now });
+        Shortcuts.Add(new ShortcutModel { Id = 3, Grouping = "Default Shortcuts", Title = "UB Account Maintanence", Link = "http://google.com", LinkDescription = "UB Account Maintenance", LastUpdated = DateTime.Now });
+        Shortcuts.Add(new ShortcutModel { Id = 4, Grouping = "Default Shortcuts", Title = "UB Account Maintanence", Link = "http://google.com", LinkDescription = "UB Account Maintenance", LastUpdated = DateTime.Now });
+        Shortcuts.Add(new ShortcutModel { Id = 5, Grouping = "Default Shortcuts", Title = "UB Account Maintanence", Link = "http://google.com", LinkDescription = "UB Account Maintenance", LastUpdated = DateTime.Now });
+    }
+
+    private void HandleGroupUpdated(ShortcutModel updatedShortcut)
+    {
+        Console.WriteLine(updatedShortcut.Title);
+    }
+}

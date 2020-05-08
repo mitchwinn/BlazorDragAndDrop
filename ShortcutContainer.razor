@@ -1,0 +1,25 @@
+<div class="shortcuts-container">
+    <CascadingValue Value="this">
+        @ChildContent
+    </CascadingValue>
+</div>
+
+@code {
+    [Parameter] public List<ShortcutModel> Shortcuts { get; set; }
+    [Parameter] public RenderFragment ChildContent { get; set; }
+    [Parameter] public EventCallback<ShortcutModel> OnGroupUpdate { get; set; }
+
+    public ShortcutModel Payload { get; set; }
+
+    public async Task UpdateShortcutAsync(string group)
+    {
+        var task = Shortcuts.SingleOrDefault(shortcut => shortcut.Id == Payload.Id);
+
+        if (task != null)
+        {
+            task.Grouping = group;
+            task.LastUpdated = DateTime.Now;
+            await OnGroupUpdate.InvokeAsync(Payload);
+        }
+    }
+}
