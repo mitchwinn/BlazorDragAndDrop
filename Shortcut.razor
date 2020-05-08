@@ -1,6 +1,6 @@
 <li class="draggable" draggable="true" title="@ShortcutModel.Title" @ondragstart="@(() => HandleDragStart(ShortcutModel))">
     <p class="last-updated"><small>Last Updated</small> @ShortcutModel.LastUpdated.ToString("HH:mm.ss tt")</p>
-    <a href="@ShortcutModel.Link">@ShortcutModel.LinkDescription</a>
+    <a draggable="false" href="@ShortcutModel.Link">@ShortcutModel.LinkDescription</a>
 </li>
 
 @code {
